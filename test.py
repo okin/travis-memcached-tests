@@ -41,6 +41,9 @@ def get_value(client):
         print("Caught exception: {!r}".format(err))
         return
 
+    if isinstance(value, tuple):
+        value = value[0]
+
     assert VALUE == value
 
 
