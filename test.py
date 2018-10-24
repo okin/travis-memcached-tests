@@ -36,11 +36,11 @@ def get_value(client):
     print("Trying to get a value with {}...".format(client))
     try:
         value = client.get(KEY)
+        print("Got value {!r}".format(value))
     except Exception as err:
         print("Caught exception: {!r}".format(err))
         return
 
-    print(repr(value))
     assert VALUE == value
 
 
