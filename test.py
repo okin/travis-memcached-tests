@@ -40,6 +40,7 @@ def get_value(client):
         print("Caught exception: {!r}".format(err))
         return
 
+    print(repr(value))
     assert VALUE == value
 
 
