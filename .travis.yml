@@ -1,0 +1,15 @@
+language: python
+
+python:
+  - "2.7"
+
+services:
+  - memcached
+
+install:
+  - CFLAGS="-Wno-error=write-strings" pip install -r requirements.txt
+
+script:
+  - flake8 ./mozsvc
+  - python setup.py test
+
