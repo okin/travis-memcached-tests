@@ -4,6 +4,8 @@ import memcache  # python-memcached
 import umemcache
 
 ADDRESS = "127.0.0.1:11211"
+KEY = 'testing'
+VALUE = 'this is a test'
 
 
 def test_memcache_client():
@@ -11,6 +13,7 @@ def test_memcache_client():
     client = memcache.Client([ADDRESS], debug=1)
     print("Client is connected")
 
+    set_value(client)
     get_value(client)
 
 
@@ -20,15 +23,24 @@ def test_umemcache_client():
     client = umemcache.Client(ADDRESS)
     client.connect()
     print("Client is connected")
+
+    set_value(client)
     get_value(client)
+
+
+def set_value(client):
+    client.set(KEY, VALUE)
 
 
 def get_value(client):
     print("Trying to get a value with {}...".format(client))
     try:
-        client.get("")
+        value = client.get(KEY)
     except Exception as err:
         print("Caught exception: {!r}".format(err))
+        return
+
+    assert VALUE == value
 
 
 if __name__ == '__main__':
